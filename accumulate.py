@@ -14,37 +14,20 @@ class Accumulator(ABC):
     def __sub__(self, other):
         return self.accumulate(-other)
 
+    def __str__(self):
+        return str(self.value)
+    
 class MyAccumulator(Accumulator):
-    def __init__(self):
-        self._sum = 0
-
     def accumulate(self, value):
-      self._sum += value
-      return self
-    
-    def add(self, x):
-        self._sum += x
+        self.value += value
         return self
-    
-    def subtract(self, x):
-        self._sum -= x
-        return self
-    
-    def multiply(self, x):
-        self._sum *= x
-        return self
-    
-    def divide(self, x):
-        self._sum /= x
-        return self
-    
-    def clear(self):
-        self._sum = 0
-        return self
-    
-    def get_value(self):
-        return self._sum
 
-my_acc = MyAccumulator()
-my_acc.add(5).add(10).add(15)
-print(my_acc.get_value())  # Output: 30
+a = MyAccumulator(0)
+b = MyAccumulator(10)
+
+# Chained method calls
+a.accumulate(5).accumulate(3).accumulate(2)
+b.accumulate(1).accumulate(2).accumulate(3)
+
+print(a)  # Output: 10
+print(b)  # Output: 16
